@@ -1,3 +1,4 @@
+
 // 菜单栏数据
 export default {
     namespaced: true,
@@ -20,6 +21,14 @@ export default {
         REMOVE_SELECTTAB({selectTab},val){
             const index = selectTab.findIndex(item=>item.name == val.name)
             selectTab.splice(index,1)
+        },
+        // 设置菜单栏menu数据
+        SET_MENU(state,val){
+            state.menu = val
+        },
+        // 动态注册路由
+        ADD_MENU(state,router){
+            // 判断当前缓存中是否有数据
             
         }
 
@@ -36,7 +45,8 @@ export default {
                 icon: "s-home",
                 url: "Home/Home",
             },
-
         ],
+        // 菜单栏
+        menu:[]
     }
 }

@@ -17,6 +17,7 @@
 <script>
 // import Mock from 'mockjs'
 import {getMenu} from '@/api'
+
 export default {
     name:'Login',
     data() {
@@ -37,7 +38,11 @@ export default {
             this.$refs.loginForm.validate((valid)=>{
                 if(valid){
                     getMenu(this.loginForm).then(({data})=>{
+                        // 获取菜单数据，存入store
+                        this.$store.commit('tab/SET_MENU',data.data.menu)
                         
+                        this.$store.commit('tab/ADD_MENU',this.$router)
+
                         if(data.code == 20000){
                             this.$message.success('登陆成功')
                             // 存入token信息用于不同页面跳转
@@ -51,9 +56,8 @@ export default {
                 }
             })
             
-            /* const token = Mock.Random.guid()
-            this.$cookie.set('token',token)
-            this.$router.push('/home') */
+            // const token = Mock.Random.guid()
+            
         }
     },
 }

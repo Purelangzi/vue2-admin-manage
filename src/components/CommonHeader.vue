@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="l-container">
       <el-button
-        style="margin-right:20px"
+        style="margin-right: 20px"
         @click="handleMenu"
         icon="el-icon-menu"
         size="mini"
@@ -10,21 +10,22 @@
       <span class="text">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item
-          v-for="item in selectTab"
-          :key="item.path"
-          :to="{ path: item.path }">{{item.label}}</el-breadcrumb-item>
-         
+            v-for="item in selectTab"
+            :key="item.path"
+            :to="{ path: item.path }"
+            >{{ item.label }}</el-breadcrumb-item
+          >
         </el-breadcrumb>
       </span>
     </div>
     <div class="r-container">
-      <el-dropdown>
+      <el-dropdown @command="handleClick">
         <span class="el-dropdown-link">
           <img class="user" src="@/assets/images/user.png" alt="" />
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item @click="loginOut">退出</el-dropdown-item>
+          <el-dropdown-item command="loginOut">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -44,20 +45,23 @@ export default {
     // }
     // Aside侧边栏修改
     ...mapMutations("tab", { handleMenu: "COLLAPSE_AISDEMEMU" }),
-    // 顶部面包屑修改
-    loginOut(){
-      this.$cookie.remove('token')
-      this.$message.success('登出成功')
-      this.$router.push('/login')
-    }
-    
+
+    // 点击菜单项触发的事件
+    handleClick(command) {
+      // 指令（标识）为登出
+      if (command == "loginOut") {
+        this.$cookie.remove("token");
+        this.$message.success("登出成功");
+        this.$router.push("/login");
+      }
+    },
   },
   computed: {
     // 面包屑数据
     /* ...mapState({
       kkc: state => state.tab.selectTab
     }) */
-    ...mapState("tab",['selectTab'])
+    ...mapState("tab", ["selectTab"]),
   },
 };
 </script>
@@ -82,25 +86,23 @@ export default {
       border-radius: 50%;
     }
   }
-  .l-container{
+  .l-container {
     display: flex;
     align-items: center;
     // /deep/样式穿透,因为element-ui组件样式有限制
-    /deep/.el-breadcrumb__item{
-      .el-breadcrumb__inner{
+    /deep/.el-breadcrumb__item {
+      .el-breadcrumb__inner {
         font-weight: normal;
         // el-breadcrumb__inner .is-link
-        &.is-link{
+        &.is-link {
           color: #666;
         }
       }
       &:last-child {
-        .el-breadcrumb__inner{
-          
-           &.is-link{
+        .el-breadcrumb__inner {
+          &.is-link {
             color: #fff;
-        }
-          
+          }
         }
       }
     }

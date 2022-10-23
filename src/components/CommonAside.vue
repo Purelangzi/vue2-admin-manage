@@ -111,13 +111,16 @@ export default {
 
   },
   computed: {
+    ...mapState('tab',['menu']),
     // 没有子菜单
     noChildren() {
-      return this.menuData.filter((item) => !item.children);
+      
+      return this.menu.filter((item) => !item.children);
     },
     // 有子菜单
     hasChildren() {
-      return this.menuData.filter((item) => item.children);
+      
+      return this.menu.filter((item) => item.children);
     },
     // 映射vuex里模块tab中的state里的isCollapse数据
     // isCollapse(){
@@ -125,7 +128,11 @@ export default {
     // }
     ...mapState("tab", ["isCollapse"]),
   },
-  mounted() {},
+  mounted() {
+    
+    
+   
+  },
 };
 </script>
 
