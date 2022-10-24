@@ -42,6 +42,8 @@ export default {
                         this.$store.commit('tab/SET_MENU',data.data.menu)
                         
                         this.$store.commit('tab/ADD_MENU',this.$router)
+                        
+                        
 
                         if(data.code == 20000){
                             this.$message.success('登陆成功')

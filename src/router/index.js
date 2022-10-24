@@ -2,11 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Main from '@/views/Main.vue'
-import Home from '@/views/Home.vue'
+/* import Home from '@/views/Home.vue'
 import User from '@/views/User.vue'
 import Mall from '@/views/Mall.vue'
 import PageOne from '@/views/PageOne.vue'
-import PageTwo from '@/views/PageTwo.vue'
+import PageTwo from '@/views/PageTwo.vue' */
 import Login from '@/views/Login.vue'
 
 
@@ -20,12 +20,12 @@ Vue.use(VueRouter);
 
 
 const routes = [
-    {
+    {   name:'Main',
         path: '/',
         component: Main,
         redirect:'/home',
         children:[
-            {   // 首页
+            /* {   // 首页
                 name:'home',
                 path: 'home',
                 component: Home
@@ -49,7 +49,7 @@ const routes = [
                 name:'page2',
                 path:'page2',
                 component:PageTwo
-            },
+            }, */
 
         ]
     },
@@ -74,6 +74,7 @@ router.beforeEach((to, from, next) => {
     }else{
         next()
     }
+    
     
 })
 export default router

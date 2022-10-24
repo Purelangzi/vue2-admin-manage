@@ -33,7 +33,7 @@
           v-for="subItem in item.children"
           :key="subItem.label"
         >
-          <el-menu-item :index="subItem.name" @click="ClickMenu(subItem)">{{
+          <el-menu-item :index="subItem.name" @click="ClickAsideMenu(subItem)">{{
             subItem.label
           }}</el-menu-item>
         </el-menu-item-group>
@@ -49,49 +49,7 @@ export default {
   name: "CommonAside",
   data() {
     return {
-      menuData: [
-        {
-          path: "/",
-          name: "home",
-          label: "首页",
-          icon: "s-home",
-          url: "Home/Home",
-        },
-        {
-          path: "/mall",
-          name: "mall",
-          label: "商品管理",
-          icon: "video-play",
-          url: "MallManage/MallManage",
-        },
-        {
-          path: "/user",
-          name: "user",
-          label: "用户管理",
-          icon: "user",
-          url: "UserManage/UserManage",
-        },
-        {
-          label: "其他",
-          icon: "location",
-          children: [
-            {
-              path: "/page1",
-              name: "page1",
-              label: "页面1",
-              icon: "setting",
-              url: "Other/PageOne",
-            },
-            {
-              path: "/page2",
-              name: "page2",
-              label: "页面2",
-              icon: "setting",
-              url: "Other/PageTwo",
-            },
-          ],
-        },
-      ],
+      
     };
   },
   methods: {
@@ -111,16 +69,19 @@ export default {
 
   },
   computed: {
-    ...mapState('tab',['menu']),
+    menuData(){
+      // 当前缓存没有就获取store的菜单数据
+      return JSON.parse(this.$cookie.get('menu')) || this.$store.tab.menu
+    },
     // 没有子菜单
     noChildren() {
       
-      return this.menu.filter((item) => !item.children);
+      return this.menuData.filter((item) => !item.children);
     },
     // 有子菜单
     hasChildren() {
       
-      return this.menu.filter((item) => item.children);
+      return this.menuData.filter((item) => item.children);
     },
     // 映射vuex里模块tab中的state里的isCollapse数据
     // isCollapse(){

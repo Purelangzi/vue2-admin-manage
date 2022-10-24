@@ -90,5 +90,8 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  
+  // 解决刷新页面白屏，因为没在登陆入口调动态添加路由的方法
+  created() {
+    store.commit('tab/ADD_MENU',router)
+  }
 }).$mount('#app')

@@ -51,6 +51,9 @@ export default {
       // 指令（标识）为登出
       if (command == "loginOut") {
         this.$cookie.remove("token");
+        this.$cookie.remove("menu");
+        // 登出清除面包屑数据，防止用户登陆后面包屑还留存上个用户的操作
+        this.$store.commit('tab/REMOVE_ALLSELECTTAB')
         this.$message.success("登出成功");
         this.$router.push("/login");
       }
