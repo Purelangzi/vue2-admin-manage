@@ -57,7 +57,6 @@ export default {
                 }
                 
             })
-            console.log(menuArray);
             menuArray.forEach(item=>{
                 router.addRoute('Main',item)
             })
